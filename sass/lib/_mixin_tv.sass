@@ -1,0 +1,244 @@
+///*@mixin*/
+
+// =animation($name: fade-In, $duration: 1s, $function: ease, $delay: 0,$count: 1 ,$direction:normal, $mode: both)
+//   +experimental(animation, $name $duration $function $delay $count $direction $mode)
+
+=animation($animations...)  
+  $name: fade-In
+  $duration: 1s
+  $function: ease
+  $delay: 0s
+  $count: 1
+  $direction: normal
+  $mode: both
+  //$state: running
+  $total_list: length($animations)
+  $defualt_v: ($name $duration $function $delay $count $direction $mode)
+  $defualt_length: length($defualt_v)
+  $final_list: ()
+  @for $i from 1 through $total_list
+    $temp_a: nth($animations,$i)
+    $temp_l: length($temp_a)
+    //$temp_d: $defualt_length - $temp_l
+    @if $temp_l< $defualt_length
+      @for $k from ($temp_l+1) through $defualt_length
+        $temp_a: append($temp_a,nth($defualt_v,$k),"space")
+    $final_list: append($final_list,$temp_a,"comma")
+  +experimental(animation, $final_list)
+ 
+
+//+animation(album-slide-in 0.6s ease-out 0.6s 1 normal both, fade-in 0.3s)
+
+
+
+=keyframes($keyframes-name)
+  @-moz-keyframes #{$keyframes-name}
+    @content
+  @-webkit-keyframes #{$keyframes-name}
+    @content
+  @-ms-keyframes #{$keyframes-name}
+    @content
+  @keyframes #{$keyframes-name}
+    @content
+
+
+
+
+=rem($property, $px-values,$baseline-px: 16px)
+  
+  // Convert the baseline into rems
+  $baseline-rem: $baseline-px / 1rem
+  
+  // Print the first line in pixel values
+  //#{$property}: $px-values
+  
+  // If there is only one (numeric) value, return the property/value line for it.
+  @if type-of($px-values) == "number"
+    #{$property}: $px-values / $baseline-rem
+  @else
+
+    // Create an empty list that we can dump values into
+    $rem-values: unquote("")
+
+    @each $value in $px-values
+      
+      // If the value is zero, return 0
+      @if $value == 0
+        $rem-values: append($rem-values, $value)
+
+      @else
+        $rem-values: append($rem-values, $value / $baseline-rem)
+
+    // Return the property and its list of converted values
+    #{$property}: $rem-values
+
+
+
+//rem2px
+@function rem2px($rem-values,$baseline-px: 16px)  
+  $baseline-rem: $baseline-px/1rem
+  $px-values: null
+  
+  @each $value in $rem-values
+  
+    // @if type-of($value) != "number"
+    //   $value: unquote($value)
+
+    @if unit($value)=="rem"
+      $value: ($value/1rem)*$baseline-px
+      $px-values: append($px-values,$value)
+    @else 
+      @warn "unit not rem"
+      $px-values: append($px-values, $value)     
+
+  @return $px-values
+
+
+//rem
+@function rem($px-values,$baseline-px: 16px)
+  $baseline-px: 16px
+  $baseline-rem: $baseline-px/1rem
+  $rem-values: null
+  
+  @each $value in $px-values
+  
+    // @if type-of($value) != "number"
+    //   $value: unquote($value)
+
+    @if unit($value)=="px"
+      $value: $value/$baseline-rem
+      $rem-values: append($rem-values,$value)
+    @else 
+      @warn "unit not px"
+      $rem-values: append($rem-values, $value)
+     
+
+  @return $rem-values
+
+
+
+
+  
+
+
+
+=sprite-dimensions-rem($map, $sprite, $ratio:1) 
+
+  height: rem(image-height(sprite-file($map, $sprite))/$ratio)
+  width: rem(image-width(sprite-file($map, $sprite))/$ratio)
+
+  // +rem(height,image-height(sprite-file($map, $sprite)))
+  // +rem(width,image-width(sprite-file($map, $sprite)))
+
+=background-size-rem($map,$ratio:1)
+
+  $image-width-rem:  rem(image-width(sprite-path($map))/$ratio)
+  $image-height-rem: rem(image-height(sprite-path($map))/$ratio) 
+
+  background-size: $image-width-rem $image-height-rem
+=sprite-position-rem($map,$sprite,$ratio:1)
+  $pos: sprite-position($map,$sprite)
+  background-position: rem(nth($pos, 1)/$ratio) rem(nth($pos, 2)/$ratio)
+
+
+
+
+
+
+
+
+
+
+   
+
+%with-under-shadow
+  content: ""
+  background-image: -moz-radial-gradient(center top,ellipse farthest-side , rgba(0, 0, 0, 0.85) , transparent)
+  background-image: -webkit-radial-gradient(center top,ellipse farthest-side , rgba(0, 0, 0, 0.85) , transparent)
+  width: 125%
+  height: 0.6rem
+  left: -12.5%
+  display: block
+  bottom: -0.56rem
+  position: absolute
+  
+%item-with-under-shadow
+  content: ""
+  background-image: -moz-radial-gradient(center center,ellipse farthest-side , rgba(0, 0, 0, 0.3) , transparent)
+  background-image: -webkit-radial-gradient(center center,ellipse farthest-side , rgba(0, 0, 0, 0.3) , transparent)
+  width: 120%
+  height: 0.3rem
+  left: -11%
+  display: block
+  margin-top: -0.6rem
+  position: absolute
+
+  
+%black-gradient
+  +background-image(linear-gradient(rgba(0,0,0,1), rgba(48,53,56,1)))
+
+%center-holder
+  position: relative
+  width: 64rem
+  top: 0
+  left: calc(50% - 32rem)
+
+%no-style-list
+  list-style: none
+  padding-left: 0
+  margin: 0
+%gray-input
+  padding-left: 0.3rem
+  border-radius: 0.145rem
+  background-color: rgba(210,210,210,.9)
+  box-shadow: 0 0.0625rem rgba(255,255,255,.17), inset 0 0.125rem 0.375rem rgba(0,0,0,.4), inset 0 0 0.125rem rgba(0,0,0,.24)
+  border: solid 1px #666
+  +background-image(linear-gradient(bottom, rgba(0,0,0,.1), rgba(255,255,255,.1)))
+
+
+
+=pt2px($property, $pt-values,$baseline-pt: 1.33333pt)
+  
+  // Convert the baseline into rems
+  $baseline-pt: $baseline-pt / 1pt
+  
+  // Print the first line in pixel values
+  //#{$property}: $pt-values
+  
+  // If there is only one (numeric) value, return the property/value line for it.
+  @if type-of($pt-values) == "number"
+    #{$property}: $pt-values / $baseline-pt
+  @else
+
+    // Create an empty list that we can dump values into
+    $px-values: unquote("")
+
+    @each $value in $pt-values
+      
+      // If the value is zero, return 0
+      @if $value == 0
+        $px-values: append($px-values, $value)
+
+      @else
+        $px-values: append($px-values, $value / $baseline-pt)
+
+    // Return the property and its list of converted values
+    #{$property}: $px-values
+
+
+
+
+@function pt2px($pt-values,$baseline-pt: 1.333333px)  
+  $baseline-rem: $baseline-pt/1pt
+  $px-values: null
+  
+  @each $value in $pt-values
+  
+    @if unit($value)=="pt"
+      $value: ($value/1pt)*$baseline-pt
+      $px-values: append($px-values,$value)
+    @else 
+      @warn "unit not pt"
+      $px-values: append($px-values, $value)     
+
+  @return $px-values

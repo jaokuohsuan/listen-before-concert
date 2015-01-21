@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="description" content="first backbone app">
+	<meta name="viewport" content="width=device-width">
+	<link rel="stylesheet" href="css/main.css">
+	<script src="js/vendor/modernizr-2.6.2.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400' rel='stylesheet' type='text/css'>
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+	<!--<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>-->
+<!--<script src="js/vendor/handlebars.js"></script>
+-->
+<script src="js/vendor/underscore-min.js"></script>
+<script src="js/vendor/backbone.js"></script>
+<script src="js/vendor/backbone.safe.js"></script>
+<script src="js/app.js"></script>
+<!--<script src="https://apis.google.com/js/client.js?onload=onClientLoad"></script>
+-->
+
+<script id="search-item-templete" type="text/template">	  
+               
+				<div href="#" class="artist-but">
+				<figure class="artist-thumb">
+					<img src=<%= artistImage %>></figure>
+
+				<span class="artist-name"><%= artistName %></head>
+				<a href="#" class="artist-remove"><i class="icon-remove"></i></a>
+				</div>
+			   
+</script>
+
+<script id="album-item-template" type="text/template">
+
+
+			<a href="#" class="album-but">
+				<figure class="album-thumb">
+					<img src=<%= albumCover %>></figure>
+				<span class="album-title"><%= albumName %></span>
+			</a>
+
+			<span class="album-time"> </span>
+
+			
+  
+</script>
+<script id="search-autocomplate-template" type="text/template">
+		<%= artistName %>
+</script>
+
+<title>listen before concert</title>
+</head>
+<body>
+
+<div id="ui-layer">
+
+	<div id="artist-catalogue-wrap">
+		<div class="search-wrap">
+
+			<form  class="artist-search">
+				<input type="text" name="artist-search" list="artist-name-list" id="artist-search" autocomplete="on" placeholder="artist or band..." />
+				<datalist id="artist-name-list">
+					
+
+				</datalist>
+			</form>
+
+			<a class="back-but">back</a>
+
+		</div>
+		<div class="artist-wrap">
+			<div class="artist-line"></div>
+			<ul class="artist-catalogue-list"></ul>
+		</div>
+
+	</div>
+	<div id="album-item-wrap" class="is-hide">
+	  <div class="album-scroll">
+
+		<ul class="album-item-list"></ul>
+		<div class="album-line">
+			<div class="line-inner"></div>
+
+		</div>
+	  </div>
+
+	</div>
+
+
+</div>
+
+
+<div id="videoBg-wrap">
+  <div id="UtubePlayer"></div>
+</div>
+<div id="bg-layer"></div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-158596-10', 'assuper.com');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

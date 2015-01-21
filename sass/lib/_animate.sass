@@ -1,0 +1,90 @@
+//fade-in
++keyframes(fade-in)
+  0%
+    opacity: 0
+
+  100%
+    opacity: 1
+
+//fade-out
++keyframes(fade-out)
+  0%
+    opacity: 1
+  100%
+    opacity: 0
+
+
++keyframes(album-slide-in)
+  0%
+    +transform(translateX(9.2rem))
+   
+  100%
+    +transform(translateX(-1.1rem))
+ 
+
+
++keyframes(album-slide-out)
+  0%
+    +transform(translateX(-1.1rem))
+
+  100%
+    +transform(translateX(9.2rem))
+
+
+
++keyframes(artist-slide-out)
+  0%
+    +transform(translateX(1.5rem))
+ 
+  100%
+    +transform(translateX(-12rem))
+  
+
+
++keyframes(artist-slide-in)
+  0%
+    +transform(translateX(-12rem))
+  
+  100%
+    +transform(translateX(1.5rem))
+
+
+
+//Whole UI   
+// +keyframes(ui-hide)
+//   0%
+//     +transform(translateX(0))
+//   100%
+//     +transform(translateX(-60rem))
+
+// +keyframes(ui-show)
+//   0%
+//     +transform(translateX(-60rem))
+//   100%
+//     +transform(translateX(0))
+
+
++keyframes(album-playing)
+  0%
+    background-color: rgba(255,255,255,0.2)
+    box-shadow: 0 0 rem(3px) rgba(#0094e0,0)
+  100%
+    background-color: rgba(#0094e0,0.8)
+    box-shadow: 0 0 rem(3px) rgba(#0094e0,1)
+
+
++keyframes(shake)
+  0%,100%
+    +transform(translateX(0))
+  10%, 30%, 50%, 70%, 90%
+    +transform(translateX(-0.5rem))
+  20%, 40%, 60%, 80% 
+    +transform(translateX(0.5rem))
+
+
+.no-animation
+  -webkit-animation: none
+  -moz-animation: none
+  -ms-animation: none
+
+

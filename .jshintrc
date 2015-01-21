@@ -1,0 +1,17 @@
+{
+    
+    "browser": true,
+
+   
+    "jquery": true,
+
+
+
+
+    "predef": [
+        "define",
+        "_",
+        "Backbone",
+        "App"
+    ]
+}

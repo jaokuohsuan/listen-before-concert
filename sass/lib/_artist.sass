@@ -1,0 +1,481 @@
+
+
+
+/*store layer*/
+
+$slide-time: 0.5s
+$slide-delay: 1.3s
+$select-color: #0094e0
+
+
+#ui-layer
+  width: 23%
+  height: calc(100% -  7.1rem)
+  position: absolute
+  right: 0
+
+  z-index: 20
+  transition-property: transform
+  transition-property: -moz-transform
+  transition-duration: $slide-time
+  transition-timing-function: ease
+  -webkit-transition-property: -webkit-transform
+  -webkit-transition-duration: $slide-time
+  -webkit-transition-timing-function: ease
+  &.slide-in
+    transform: translateX(0)
+    
+    +animation(ui-show $slide-time)
+
+  &.slide-out
+    transform: translateX(60rem)
+    transition-delay: $slide-delay
+    -webkit-transition-delay: $slide-delay
+    +animation(ui-hide $slide-time ease-in 1.5s)
+
+    
+
+
+#artist-catalogue-wrap
+  margin-left: 2rem
+  margin-top: 4.5rem
+  margin-right: 1rem
+  width: 11.2rem
+  float: left
+
+.artist-search 
+  position: absolute
+  transition-property: transform
+  transition-property: -moz-transform
+  transition-duration: $slide-time
+  transition-timing-function: ease
+  -webkit-transition-property: -webkit-transform
+  -webkit-transition-duration: $slide-time
+  -webkit-transition-timing-function: ease
+  &:before
+    content: "\f002"
+    display: block
+    position: absolute
+    font-size: 0.63rem
+    font-family: 'listenicon'
+    -webkit-font-smoothing: antialiased
+    color: #777
+    left: 0.45rem
+    top: 50%
+    transform: translateY(-50%)
+    z-index: 10
+  &:after
+    // content: "\f09c"
+
+    display: block
+    position: absolute
+    font-size: 0.9rem
+    font-family: 'listenicon'
+    -webkit-font-smoothing: antialiased
+    color: #777
+    right: 0.7rem
+    top: calc( 50% - 0.5rem)
+    z-index: 10
+  .unlock &:after
+    // content: "\f09c"
+    // +animation(fade-out 1s ease 3s)
+
+  input 
+    border: 1px solid #acacac
+    height: rem(19px)
+    font-size: 0.7rem
+    padding: rem(2px) 0.5rem rem(1px) 1.5rem
+    width: 8rem
+    color: #999        
+    border-radius: 20rem
+    &:focus
+      outline: 0
+  .show-album &
+    +animation(fade-out $slide-time ease)
+  .show-artist &
+    +animation(fade-in $slide-time ease)
+.search-wrap
+  position: relative
+.back-but
+  color: #fff
+  width: 2.5rem
+  height: 2.5rem
+  background-color: rgba(255,255,255,0.2)
+  border-radius: 50%
+  position: absolute
+  cursor: pointer
+  left: 2.7rem
+  text-indent: -9999px
+  display: none
+  top: 2.5rem
+  &:hover
+    background-color: rgba(255,255,255,0.65)
+
+
+  &:before
+    font-size: 1.2rem
+    color: #fff
+    content: "\f060"
+    display: block
+    position: absolute
+    font-family: 'listenicon'
+    -webkit-font-smoothing: antialiased
+    left: 0.6rem
+    top: 50%
+    transform: translateY(-50%)
+    z-index: 10
+    text-indent: 0      
+
+  .show-artist &
+    display: none
+  .show-album &    
+    display: inline-block
+    +animation(fadein $slide-time ease $slide-time)
+
+
+
+.artist-wrap
+  position: relative
+  transform: translateX(1.5rem)
+  top: 1.52rem
+  .show-album &
+    +animation(artist-slide-out $slide-time ease-out, fade-out $slide-time ease)
+  .show-artist &
+    +animation(artist-slide-in $slide-time ease-out, fade-in $slide-time ease)
+
+.album-line  
+  width: 1px
+  background-color: rgba(255,255,255,0.3)
+  position: absolute
+  top: 0
+  bottom: 0
+  .line-inner
+    background-color: rgba(#0094e0,0.6)
+    box-shadow: 0 0 rem(3px) rgba(#0094e0,0.4)
+    position: absolute
+    width: 1px
+    top: 0
+    transition-property: bottom
+    transition-duration: $slide-time
+    transition-timing-function: ease
+    transition-delay: 0.2s
+    -webkit-transition-property: bottom
+    -webkit-transition-duration: $slide-time
+    -webkit-transition-timing-function: ease
+    -webkit-transition-delay: 0.2s
+    
+    //bottom: calc(87.5% - 1.7rem)
+
+.artist-catalogue-list
+  position: relative
+  z-index: 20
+  list-style: none
+  //padding-top: 1rem
+  padding-left: 0
+  font-size: 0.9rem
+  margin-top: 0  //0.7rem
+  left: -2rem
+
+  // &:after              //for playing
+  //   content: ""
+  //   display: block
+  //   position: absolute
+  //   top: 1.7rem
+  //   left: 3rem
+  //   height: 1px
+  //   width: calc(100% - 0.95rem)
+  //   background-color: rgba(255,255,255,0.3)
+  //   z-index: 10
+
+  .artist-item    
+    .artist-but
+      display: block
+      text-decoration: none
+    
+
+.artist-item
+  padding-left: 2rem
+  list-style: none
+  color: #fff
+  position: relative
+  &:hover 
+    .artist-but
+      color: #fff
+      text-shadow: 0 0 0.35rem rgba(255,255,255,0.9),0 0 0.8rem rgba(255,255,255,0.7)
+    .artist-remove
+      display: block
+  &:first-child
+    padding-top: 1rem
+    .artist-remove
+      top: 3.3rem
+  &:last-child
+    .artist-but
+      padding-bottom: 0
+
+  &.is-playing
+    .artist-but
+      color: #0094E0
+
+.artist-remove
+  position: absolute
+  color: rgba(255,255,255,1)
+  font-size: 1.2rem
+  top: 2.3rem
+  left: 0 
+  text-decoration: none
+  display: none
+  transition-property: color text-shadow
+  transition-duration: $slide-time
+  transition-timing-function: ease
+  -webkit-transition-property: color text-shadow
+  -webkit-transition-duration: $slide-time
+  -webkit-transition-timing-function: ease
+
+  &:hover
+    color: rgba(50,255,255,1)
+    text-shadow: 0 0 rem(3px) rgba(#0094e0,1)
+
+.artist-but 
+  cursor: pointer 
+  text-decoration: none
+  white-space: nowrap
+  display: block
+  margin-bottom: 0.5rem
+  padding: 0.7rem 0 0.5rem 0.3rem
+  color: #fff
+  
+
+  &:hover
+    .artist-name
+      color: #0094E0
+  &.is-playing
+    .artist-name
+      color: #0094E0
+    .artist-thumb:before
+      border-color: rgba($select-color,0.25)
+
+
+    
+
+.artist-thumb
+  width: 5rem
+  height: 5rem
+  overflow: hidden
+  border-radius: 50%
+  display: inline-block  
+  box-sizing: border-box
+  position: relative
+  z-index: 20
+  background-color: #000
+  vertical-align: middle
+
+  &:before
+    content: ""
+    position: absolute
+    display: block
+    width: 100%
+    height: 100%
+    border: 0.3em solid rgba(255,225,225,0.25)
+    box-sizing: border-box    
+    border-radius: 50%
+  &:hover
+    &:before
+      border-color: rgba(255,225,225,0.6)
+
+      
+
+
+    
+
+  
+  img
+    height: 100%
+
+  &.is-tall
+    img
+      width: 100%
+      height: auto
+
+      
+.artist-name  
+  text-decoration: none
+  display: inline-block
+  padding-left: 0.5rem
+  font-size: 1.1rem
+  text-shadow: 0 0 1px rgba(0,0,0,1)
+  vertical-align: middle
+  //font-weight: 200
+
+.artist-line
+  background: rgba(255, 255, 255, 0.25)
+  position: absolute
+  left: 50%
+  top: 0
+  bottom: 0
+  width: 0.3rem
+  left: 2.7rem
+  z-index: 10
+
+#album-item-wrap
+  //margin-top: 7.8rem
+  //margin-left: -4rem
+  top: 10.8rem
+  //left: 9.2rem
+  left: 0
+  display: inline-block
+  position: absolute
+  padding: 0 20rem 0 0
+  width: 12rem
+  height: calc(100% - 7.8rem)
+  overflow: hidden
+  opacity: 0
+  // &:after
+  //   content: ""
+  //   position: absolute
+  //   width: 9rem
+  //   height: 0.6rem
+  //   //background-color: #fff
+  //   display: block
+  //   bottom: -0.4rem
+  //   left: 3rem
+  //   background-image: -moz-radial-gradient(center top,ellipse farthest-side , rgba(0, 0, 0, 0.25) , transparent)
+  //   background-image: -webkit-radial-gradient(center top,ellipse farthest-side , rgba(0, 0, 0, 0.25) , transparent)
+  .show-album &
+    +animation(album-slide-in $slide-time ease-out, fade-in $slide-time ease)
+  .show-artist &
+    +animation(album-slide-out $slide-time ease-out, fade-out $slide-time ease)
+    
+  //line
+  &:after              
+    content: ""
+    display: block
+    position: absolute
+    top: 0
+    left: 0
+    height: 1px
+    width: 5rem
+    background-color: rgba(255,255,255,0.3)
+    z-index: 10
+  &:before              
+    content: ""
+    display: block
+    position: absolute
+    top: 0
+    left: 0
+    height: 1px
+    width: 0
+    background-color: rgba(#0094e0,0.6)
+    box-shadow: 0 0 rem(3px) rgba(#0094e0,0.4)
+    z-index: 11
+    transition-property: width
+    transition-duration: 0.3s
+    transition-timing-function: ease-in
+    -webkit-transition-property: width
+    -webkit-transition-duration: 0.3s
+    -webkit-transition-timing-function: ease-in
+  &.is-playing:before
+    width: 5rem
+
+    
+.album-scroll
+  padding-left: 5rem
+  padding-top: 2rem
+  top: 0
+  position: relative
+
+.album-item-list
+  list-style: none
+  //width: 5.5rem
+  margin: 0 0 0 1em
+  padding: 0 1rem 0 0
+  display: block  
+  //+single-transition(top,0.4s,ease-out,0)
+
+  
+
+  .album-item
+    display: block
+    //+box-sizing(border-box)
+    width: 100%
+    margin-bottom: 2rem
+    margin-right: 1.1%
+    //box-shadow: 0 0 0.5rem rgba(255,255,255,0.15) inset
+    //background-color: rgba(0,0,0,0.15) 
+    //background-color: rgba(0,0,0,0.3) 
+    padding: 0.5rem
+    position: relative
+    
+    &:after             
+      content: ""
+      display: block
+      position: absolute
+      //top: 0
+      top: calc(3rem - 1px)
+      left: -0.95rem
+      height: 1px
+      width: 0.5rem
+      background-color: rgba(255,255,255,0.2)
+      z-index: 10
+    &:last-child
+      margin-bottom: 0 
+    .album-but
+      text-decoration: none
+      display: block
+      position: relative
+     
+      //+background-image(linear-gradient(#0b0b0b,#313639)
+    .album-thumb
+      width: 5rem
+      height: 5rem
+
+      overflow: hidden
+      box-shadow: 0 0 0.5rem rgba(0,0,0,0.3)
+      img
+        width: 100%
+    .album-title
+      font-weight: 200
+      display: block
+      color: #FFF
+      padding-top: 0.2rem
+      margin-top: -1.85rem
+      font-size: 1.05rem
+      //background-color: rgba(0,0,0,0.35)
+      position: absolute
+      top: 0
+      white-space: nowrap
+      max-width: 25.5rem
+      // @include ellipsis
+    .album-time
+      position: absolute
+      left: -3rem
+      color: #fff
+      font-weight: 200
+      top: -1rem
+      font-size: 0.7rem
+      -webkit-transform: scale(0.9)
+      color: #ccc
+    &:hover
+      //box-shadow: 0 0 1.5rem rgba(255,255,255,0.5),0 0 1rem rgba(255,255,255,0.9)
+      
+    &.is-playing  
+
+      .album-title
+        //color: rgba(#0094e0,1)  
+        color: rgba(#0094e0,0.9)
+        text-shadow: 0 0 1px rgba(#FFF,0.6) ,0 0 rem(2px) rgba(#0094e0,0.3) 
+        //text-shadow: 0 0 rem(3px) rgba(#0094e0,0.5)
+      .album-time
+        //color: rgba(#0094e0,1)
+
+
+      &:after 
+        // +animation(album-playing $slide-time ease-out 0.8s)
+
+
+
+.fade-in
+  // +animation(fade-in 0.6s ease)
+.error-shake
+  // +animation(shake 1s)
+.is-hide
+  display: none!important
